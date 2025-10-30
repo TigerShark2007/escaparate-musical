@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Escaparate Musical</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Mi Escaparate Musical</h1>
+  </header>
+
+  <main>
+    <!-- Panel de subida (oculto por defecto) -->
+    <div id="admin-panel" class="hidden">
+      <h2>Subir nueva canción</h2>
+      <input type="text" id="song-title" placeholder="Título">
+      <input type="text" id="song-artist" placeholder="Artista">
+      <input type="file" id="song-audio" accept=".mp3,.wav,.aac">
+      <input type="file" id="song-cover" accept="image/*">
+      <button id="upload-btn">Subir canción</button>
+    </div>
+
+    <!-- Botón para mostrar panel de administrador -->
+    <button id="admin-login-btn">Iniciar sesión administrador</button>
+
+    <!-- Escaparate -->
+    <div id="songs-container"></div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
