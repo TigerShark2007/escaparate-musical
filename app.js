@@ -118,3 +118,20 @@ function loadSongs() {
     });
   };
 }
+<script>
+  const adminLoginBtn = document.getElementById('admin-login-btn');
+  const adminPanel = document.getElementById('admin-panel');
+
+  adminLoginBtn.addEventListener('click', () => {
+    const password = prompt("Introduce la contraseña de administrador:");
+
+    // Cambia esta contraseña por la tuya real:
+    if (password === "1234") {
+      adminPanel.classList.remove('hidden');
+      adminLoginBtn.classList.add('hidden');
+    } else if (password !== null) {
+      alert("Contraseña incorrecta");
+    }
+  });
+</script>
+
