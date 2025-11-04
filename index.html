@@ -1,53 +1,34 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Escaparate Musical</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <h1>Mi Escaparate Musical</h1>
-  </header>
+<header>
+  <h1>Mi Escaparate Musical</h1>
+</header>
 
-  <main>
-    <!-- Panel administrador -->
-    <div id="admin-panel" class="hidden">
-      <h2>Subir nueva canción</h2>
-      <input type="text" id="song-title" placeholder="Título">
-      <input type="text" id="song-artist" placeholder="Artista">
-
-      <!-- Botón personalizado para subir audio -->
-<div class="file-upload">
-  <label class="btn-crystal">
-    Seleccionar archivo de audio
-    <input type="file" id="song-audio" accept=".mp3,.wav,.aac">
-  </label>
-  <span id="audio-file-name" class="file-name">Ningún archivo seleccionado</span>
-</div>
-
-<div class="file-upload">
-  <label class="btn-crystal">
-    Seleccionar carátula
-    <input type="file" id="song-cover" accept="image/*">
-  </label>
-  <span id="cover-file-name" class="file-name">Ningún archivo seleccionado</span>
-</div>
-
-
-      <button class="btn-crystal" id="upload-btn">Subir canción</button>
-
-    </div>
-
-    <!-- Botón login -->
+<!-- Botón para iniciar sesión -->
 <button class="btn-crystal" id="admin-login-btn">Iniciar sesión administrador</button>
 
-    <!-- Escaparate público -->
-    <div id="songs-container"></div>
-  </main>
+<!-- Panel de subida (oculto por defecto) -->
+<div id="admin-panel" class="hidden">
+  <h2>Subir nueva canción</h2>
+  <input type="text" id="song-title" placeholder="Título">
+  <input type="text" id="song-artist" placeholder="Artista">
 
-  <script src="app.js"></script>
-</body>
-</html>
+  <div class="file-upload">
+    <label class="btn-crystal">
+      Seleccionar archivo de audio
+      <input type="file" id="song-audio" accept=".mp3,.wav,.aac">
+    </label>
+    <span id="audio-file-name" class="file-name">Ningún archivo seleccionado</span>
+  </div>
 
+  <div class="file-upload">
+    <label class="btn-crystal">
+      Seleccionar carátula
+      <input type="file" id="song-cover" accept="image/*">
+    </label>
+    <span id="cover-file-name" class="file-name">Ningún archivo seleccionado</span>
+  </div>
+
+  <button class="btn-crystal" id="upload-btn">Subir canción</button>
+</div>
+
+<!-- Contenedor donde aparecerán las canciones -->
+<div id="songs-container"></div>
