@@ -1,34 +1,141 @@
-<header>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Escaparate Musical</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #d8f1f3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #00796b;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 340px;
+      text-align: center;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-crystal {
+      background-color: #5cc5b1;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .btn-crystal:hover {
+      background-color: #3da999;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #admin-login-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+    }
+
+    .file-name {
+      display: block;
+      margin-top: 5px;
+      font-size: 13px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
   <h1>Mi Escaparate Musical</h1>
-</header>
 
-<!-- Botón para iniciar sesión -->
-<button class="btn-crystal" id="admin-login-btn">Iniciar sesión administrador</button>
+  <!-- Botón de inicio de sesión -->
+  <button class="btn-crystal" id="admin-login-btn">Iniciar sesión administrador</button>
 
-<!-- Panel de subida (oculto por defecto) -->
-<div id="admin-panel" class="hidden">
-  <h2>Subir nueva canción</h2>
-  <input type="text" id="song-title" placeholder="Título">
-  <input type="text" id="song-artist" placeholder="Artista">
+  <!-- Panel oculto -->
+  <div id="admin-panel" class="card hidden">
+    <h2>Subir nueva canción</h2>
+    <input type="text" id="song-title" placeholder="Título">
+    <input type="text" id="song-artist" placeholder="Artista">
 
-  <div class="file-upload">
-    <label class="btn-crystal">
-      Seleccionar archivo de audio
-      <input type="file" id="song-audio" accept=".mp3,.wav,.aac">
-    </label>
-    <span id="audio-file-name" class="file-name">Ningún archivo seleccionado</span>
+    <div>
+      <label class="btn-crystal">
+        Seleccionar archivo de audio
+        <input type="file" id="song-audio" accept=".mp3,.wav,.aac" style="display:none;">
+      </label>
+      <span id="audio-file-name" class="file-name">Ningún archivo seleccionado</span>
+    </div>
+
+    <div>
+      <label class="btn-crystal">
+        Seleccionar carátula
+        <input type="file" id="song-cover" accept="image/*" style="display:none;">
+      </label>
+      <span id="cover-file-name" class="file-name">Ningún archivo seleccionado</span>
+    </div>
+
+    <button class="btn-crystal" id="upload-btn">Subir canción</button>
   </div>
 
-  <div class="file-upload">
-    <label class="btn-crystal">
-      Seleccionar carátula
-      <input type="file" id="song-cover" accept="image/*">
-    </label>
-    <span id="cover-file-name" class="file-name">Ningún archivo seleccionado</span>
-  </div>
+  <script>
+    const adminLoginBtn = document.getElementById('admin-login-btn');
+    const adminPanel = document.getElementById('admin-panel');
+    const audioInput = document.getElementById('song-audio');
+    const coverInput = document.getElementById('song-cover');
+    const audioFileName = document.getElementById('audio-file-name');
+    const coverFileName = document.getElementById('cover-file-name');
 
-  <button class="btn-crystal" id="upload-btn">Subir canción</button>
-</div>
+    // Mostrar nombre del archivo seleccionado
+    audioInput.addEventListener('change', () => {
+      audioFileName.textContent = audioInput.files[0]?.name || "Ningún archivo seleccionado";
+    });
 
-<!-- Contenedor donde aparecerán las canciones -->
-<div id="songs-container"></div>
+    coverInput.addEventListener('change', () => {
+      coverFileName.textContent = coverInput.files[0]?.name || "Ningún archivo seleccionado";
+    });
+
+    // Login del administrador
+    adminLoginBtn.addEventListener('click', () => {
+      const password = prompt("Introduce la contraseña de administrador:");
+      if (password === "1234") {
+        adminPanel.classList.remove('hidden');
+        adminLoginBtn.classList.add('hidden');
+      } else if (password !== null) {
+        alert("Contraseña incorrecta");
+      }
+    });
+  </script>
+</body>
+</html>
