@@ -20,25 +20,32 @@
       color: #00796b;
       text-align: center;
       font-weight: 700;
+      margin-bottom: 30px;
     }
 
     .card {
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 30px;
-      box-shadow: 0 8px 20px rgb(249 6 6 / 83%);
-      padding: 30px;
-      width: 340px;
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 35px;
+      width: 360px;
       text-align: center;
+    }
+
+    .card h2 {
+      margin-bottom: 25px;
+      color: #004d40;
     }
 
     input[type="text"],
     input[type="file"] {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       border: none;
       border-radius: 10px;
-      margin-top: 10px;
-      font-size: 14px;
+      margin-top: 12px;
+      margin-bottom: 15px;
+      font-size: 15px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
@@ -46,17 +53,20 @@
       background-color: #5cc5b1;
       color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
+      padding: 12px 22px;
+      border-radius: 25px;
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       transition: all 0.3s ease;
-      margin-top: 10px;
+      margin-top: 15px;
+      margin-bottom: 10px;
+      display: inline-block;
     }
 
     .btn-crystal:hover {
       background-color: #3da999;
+      transform: translateY(-2px);
     }
 
     .hidden {
@@ -65,15 +75,21 @@
 
     #admin-login-btn {
       position: fixed;
-      bottom: 20px;
-      left: 20px;
+      bottom: 25px;
+      left: 25px;
+      font-size: 14px;
     }
 
     .file-name {
       display: block;
-      margin-top: 5px;
+      margin-top: 6px;
+      margin-bottom: 20px;
       font-size: 13px;
       color: #444;
+    }
+
+    .field-group {
+      margin-bottom: 25px;
     }
   </style>
 </head>
@@ -87,10 +103,11 @@
   <!-- Panel oculto -->
   <div id="admin-panel" class="card hidden">
     <h2>Subir nueva canción</h2>
+
     <input type="text" id="song-title" placeholder="Título">
     <input type="text" id="song-artist" placeholder="Artista">
 
-    <div>
+    <div class="field-group">
       <label class="btn-crystal">
         Seleccionar archivo de audio
         <input type="file" id="song-audio" accept=".mp3,.wav,.aac" style="display:none;">
@@ -98,7 +115,7 @@
       <span id="audio-file-name" class="file-name">Ningún archivo seleccionado</span>
     </div>
 
-    <div>
+    <div class="field-group">
       <label class="btn-crystal">
         Seleccionar carátula
         <input type="file" id="song-cover" accept="image/*" style="display:none;">
