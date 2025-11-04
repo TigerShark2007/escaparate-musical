@@ -47,6 +47,9 @@ header h1 {
   background: rgba(255,255,255,0.7);
 }
 
+.hidden {
+  display: none;
+}
 /* ======== File Upload ======== */
 .file-upload {
   margin: 15px 0;
@@ -141,4 +144,5 @@ header h1 {
   background: rgba(255,255,255,0.5);
   box-shadow: inset 0 3px 8px rgba(0,0,0,0.05);
 }
+
 
