@@ -12,24 +12,40 @@
   </header>
 
   <main>
-    <!-- Panel de subida (oculto por defecto) -->
+    <!-- Panel administrador -->
     <div id="admin-panel" class="hidden">
       <h2>Subir nueva canción</h2>
       <input type="text" id="song-title" placeholder="Título">
       <input type="text" id="song-artist" placeholder="Artista">
-      <input type="file" id="song-audio" accept=".mp3,.wav,.aac">
-      <input type="file" id="song-cover" accept="image/*">
+
+      <!-- Botón personalizado para subir audio -->
+      <div class="file-upload">
+        <label class="btn-crystal">
+          Seleccionar archivo de audio
+          <input type="file" id="song-audio" accept=".mp3,.wav,.aac" hidden>
+        </label>
+        <span id="audio-file-name" class="file-name">Ningún archivo seleccionado</span>
+      </div>
+
+      <!-- Botón personalizado para subir carátula -->
+      <div class="file-upload">
+        <label class="btn-crystal">
+          Seleccionar carátula
+          <input type="file" id="song-cover" accept="image/*" hidden>
+        </label>
+        <span id="cover-file-name" class="file-name">Ningún archivo seleccionado</span>
+      </div>
+
       <button id="upload-btn" class="btn-crystal">Subir canción</button>
     </div>
 
-    <!-- Botón para mostrar panel de administrador -->
+    <!-- Botón login -->
     <button id="admin-login-btn" class="btn-crystal">Iniciar sesión administrador</button>
 
-    <!-- Escaparate -->
+    <!-- Escaparate público -->
     <div id="songs-container"></div>
   </main>
 
   <script src="app.js"></script>
 </body>
 </html>
-
