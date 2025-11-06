@@ -1,96 +1,98 @@
 body {
   font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle at top left, #1e1f29, #131417);
-  color: #fff;
-  text-align: center;
   margin: 0;
   padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  background: linear-gradient(135deg, #d5f3f3, #c6ecec);
+  color: #004d47;
 }
 
-header h1 {
-  margin-top: 30px;
-  font-size: 2em;
-  color: #b4f0ff;
-  text-shadow: 0 0 10px rgba(180, 240, 255, 0.6);
+.main-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #00796b;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 20px 40px;
+  border-radius: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Panel de administración */
-#admin-panel {
-  margin-top: 30px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  padding: 20px;
-  width: 90%;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 0 25px rgba(180, 240, 255, 0.2);
+.admin-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 25px;
+  padding: 30px;
+  width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
 }
 
-.hidden {
+.admin-panel.hidden {
   display: none;
 }
 
-/* Inputs */
 input[type="text"] {
-  width: 91%;
-  padding: 19px;
-  margin: 4px 4px;
-  border-radius: 44px;
+  width: 90%;
+  padding: 10px 15px;
+  margin-bottom: 15px;
   border: none;
-  background: rgb(155 222 255 / 25%);
-  color: #ffffff61;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Botones */
-.btn-crystal {
+.file-input-label {
   display: inline-block;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #b4f0ff;
+  margin: 10px 0;
+  background: #48b9b0;
+  color: white;
+  padding: 10px 18px;
   border-radius: 20px;
-  padding: 10px 20px;
-  margin: 12px;
   cursor: pointer;
-  backdrop-filter: blur(10px);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.file-input-label:hover {
+  background: #3aa39b;
+  transform: translateY(-2px);
+}
+
+.file-input-label input {
+  display: none;
+}
+
+.soft-button {
+  background: #48b9b0;
+  border: none;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
 }
 
-.btn-crystal:hover {
-  background: rgba(180, 240, 255, 0.2);
-  box-shadow: 0 0 15px rgba(180, 240, 255, 0.4);
+.soft-button:hover {
+  background: #3aa39b;
+  transform: translateY(-2px);
 }
 
-/* Canciones */
-#songs-container {
-  margin-top: 40px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-  padding-bottom: 50px;
+.admin-login {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
 }
-
-.song-card {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  width: 250px;
-  padding: 15px;
-  box-shadow: 0 0 20px rgba(180, 240, 255, 0.1);
-}
-
-.song-card img {
-  width: 100%;
-  border-radius: 15px;
-  margin-bottom: 10px;
-}
-
-.song-card h3, .song-card p {
-  margin: 5px 0;
-}
-
-audio {
-  width: 100%;
-  margin-top: 10px;
-}
-
