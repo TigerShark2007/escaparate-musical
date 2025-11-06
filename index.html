@@ -1,37 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎧 Escaparate Musical</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <!-- Pantalla inicial -->
-  <div id="login-screen">
+  <div id="login-screen" class="centered-screen">
     <h1 class="main-title">🎧 Escaparate Musical</h1>
     <button id="admin-login" class="btn-crystal">Iniciar sesión administrador</button>
   </div>
 
-  <!-- Formulario oculto -->
+  <!-- Pantalla del administrador -->
   <div id="upload-screen" class="hidden">
     <h2 class="sub-title">🎧 Escaparate Musical</h2>
     <div class="upload-box">
-      <input type="text" id="song-title" placeholder="Título de la canción" class="input-field" />
-      <input type="text" id="song-artist" placeholder="Artista" class="input-field" />
+      <input type="text" id="song-title" placeholder="Título de la canción" class="input-field">
+      <input type="text" id="song-artist" placeholder="Artista" class="input-field">
 
       <div class="file-upload">
-        <label class="btn-crystal">
-          Archivo de audio
-          <input type="file" id="audio-file" accept="audio/*" hidden />
+        <label class="btn-crystal">Archivo de audio
+          <input type="file" id="audio-file" accept="audio/*" hidden>
         </label>
         <p id="audio-name">Archivo no seleccionado</p>
       </div>
 
       <div class="file-upload">
-        <label class="btn-crystal">
-          Portada (imagen)
-          <input type="file" id="cover-file" accept="image/*" hidden />
+        <label class="btn-crystal">Portada (imagen)
+          <input type="file" id="cover-file" accept="image/*" hidden>
         </label>
         <p id="cover-name">Archivo no seleccionado</p>
       </div>
