@@ -7,45 +7,32 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>🎧 Mi Escaparate Musical</h1>
-  </header>
+  <div class="container">
+    <h1 class="main-title">🎧 Mi Escaparate Musical</h1>
 
-  <!-- Botón para iniciar sesión -->
-  <button class="btn-crystal" id="admin-login-btn">Iniciar sesión administrador</button>
-
-  <!-- Panel de subida (oculto por defecto) -->
-  <div id="admin-panel" class="hidden">
-    <h2>Subir nueva canción</h2>
-
-    <input type="text" id="song-title" placeholder="Título de la canción">
-    <input type="text" id="song-artist" placeholder="Artista">
-
-    <div class="file-upload">
-      <label class="btn-crystal">
-        Seleccionar archivo de audio
-        <input type="file" id="song-audio" accept=".mp3,.wav,.aac" hidden>
+    <div id="adminPanel" class="admin-panel hidden">
+      <h2>Subir nueva canción</h2>
+      <input type="text" id="title" placeholder="Título">
+      <input type="text" id="artist" placeholder="Artista">
+      
+      <label class="file-input-label">Seleccionar archivo de audio
+        <input type="file" id="audioFile" accept="audio/*">
       </label>
-      <span id="audio-file-name" class="file-name">Ningún archivo seleccionado</span>
+
+      <label class="file-input-label">Seleccionar carátula
+        <input type="file" id="coverFile" accept="image/*">
+      </label>
+
+      <button id="uploadBtn" class="soft-button">Subir canción</button>
     </div>
 
-    <div class="file-upload">
-      <label class="btn-crystal">
-        Seleccionar carátula
-        <input type="file" id="song-cover" accept="image/*" hidden>
-      </label>
-      <span id="cover-file-name" class="file-name">Ningún archivo seleccionado</span>
-    </div>
-
-    <button class="btn-crystal" id="upload-btn">Subir canción</button>
+    <button id="adminLoginBtn" class="soft-button admin-login">Iniciar sesión administrador</button>
   </div>
-
-  <!-- Contenedor donde aparecerán las canciones -->
-  <div id="songs-container"></div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
