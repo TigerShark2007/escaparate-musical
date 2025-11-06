@@ -109,3 +109,49 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+/* --- Canciones subidas --- */
+.song-item {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  padding: 15px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.song-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.song-cover {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(46, 208, 179, 0.4);
+}
+
+.song-info h4 {
+  margin: 0;
+  color: #2ed0b3;
+}
+
+.song-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.song-info audio {
+  margin-top: 8px;
+  width: 200px;
+  height: 25px;
+  outline: none;
+  border-radius: 8px;
+}
+
