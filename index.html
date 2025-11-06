@@ -125,37 +125,9 @@
 
     <button class="btn-crystal" id="upload-btn">Subir canción</button>
   </div>
-
-  <script>
-    const adminLoginBtn = document.getElementById('admin-login-btn');
-    const adminPanel = document.getElementById('admin-panel');
-    const audioInput = document.getElementById('song-audio');
-    const coverInput = document.getElementById('song-cover');
-    const audioFileName = document.getElementById('audio-file-name');
-    const coverFileName = document.getElementById('cover-file-name');
-
-    // Mostrar nombre del archivo seleccionado
-    audioInput.addEventListener('change', () => {
-      audioFileName.textContent = audioInput.files[0]?.name || "Ningún archivo seleccionado";
-    });
-
-    coverInput.addEventListener('change', () => {
-      coverFileName.textContent = coverInput.files[0]?.name || "Ningún archivo seleccionado";
-    });
-
-    // Login del administrador
-    adminLoginBtn.addEventListener('click', () => {
-      const password = prompt("Introduce la contraseña de administrador:");
-      if (password === "1234") {
-        adminPanel.classList.remove('hidden');
-        adminLoginBtn.classList.add('hidden');
-      } else if (password !== null) {
-        alert("Contraseña incorrecta");
-      }
-    });
-  </script>
 </body>
 </html>
+
 
 
 
