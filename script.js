@@ -34,19 +34,35 @@ coverInput.addEventListener("change", () => {
 const uploadBtn = document.getElementById("upload-btn");
 const songList = document.getElementById("song-list");
 
-uploadBtn.addEventListener("click", () => {
+uploadBtn.addEventListener("click", async () => {
   const title = document.getElementById("song-title").value.trim();
   const artist = document.getElementById("song-artist").value.trim();
+  const audioFile = audioInput.files[0];
+  const coverFile = coverInput.files[0];
 
-  if (!title || !artist || !audioInput.files.length || !coverInput.files.length) {
+  if (!title || !artist || !audioFile || !coverFile) {
     alert("Por favor, completa todos los campos y selecciona los archivos.");
     return;
   }
 
+  // Convertir los archivos a base64 para mostrarlos
+  const audioURL = await fileToBase64(audioFile);
+  const coverURL = await fileToBase64(coverFile);
+
   const songItem = document.createElement("div");
   songItem.classList.add("song-item");
   songItem.innerHTML = `
-    <span>${title} - ${artist}</span>
+    <div class="song-info">
+      <img src="${coverURL}" alt="Portada" class="song-cover">
+      <div>
+        <h4>${title}</h4>
+        <p>${artist}</p>
+        <audio controls>
+          <source src="${audioURL}" type="${audioFile.type}">
+          Tu navegador no soporta el reproductor de audio.
+        </audio>
+      </div>
+    </div>
     <button class="btn-crystal delete-btn">Eliminar</button>
   `;
 
@@ -65,4 +81,12 @@ uploadBtn.addEventListener("click", () => {
   coverName.textContent = "Archivo no seleccionado";
 });
 
-
+// Convertir archivo a Base64
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
