@@ -33,13 +33,13 @@ header h1 {
 
 /* Inputs */
 input[type="text"] {
-  width: 80%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 15px;
+  width: 91%;
+  padding: 19px;
+  margin: 4px 4px;
+  border-radius: 44px;
   border: none;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: rgb(155 222 255 / 25%);
+  color: #ffffff61;
 }
 
 /* Botones */
@@ -93,3 +93,4 @@ audio {
   width: 100%;
   margin-top: 10px;
 }
+
