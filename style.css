@@ -41,7 +41,7 @@ body {
   color: #2ed0b3;
   font-weight: bold;
   border-radius: 25px;
-  padding: 12px 25px;
+  padding: 19px 100px;
   cursor: pointer;
   backdrop-filter: blur(8px);
   box-shadow: 0 0 12px rgba(46, 208, 179, 0.3);
@@ -154,4 +154,5 @@ body {
   outline: none;
   border-radius: 8px;
 }
+
 
