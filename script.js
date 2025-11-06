@@ -5,7 +5,7 @@ const uploadScreen = document.getElementById("upload-screen");
 loginBtn.addEventListener("click", () => {
   const password = prompt("Introduce la contraseña de administrador:");
   if (password === "1234") {
-    loginScreen.classList.add("hidden");
+    loginScreen.style.display = "none";
     uploadScreen.classList.remove("hidden");
   } else {
     alert("Contraseña incorrecta.");
@@ -19,26 +19,27 @@ const audioName = document.getElementById("audio-name");
 const coverName = document.getElementById("cover-name");
 
 audioInput.addEventListener("change", () => {
-  audioName.textContent = audioInput.files[0]
+  audioName.textContent = audioInput.files.length
     ? audioInput.files[0].name
     : "Archivo no seleccionado";
 });
+
 coverInput.addEventListener("change", () => {
-  coverName.textContent = coverInput.files[0]
+  coverName.textContent = coverInput.files.length
     ? coverInput.files[0].name
     : "Archivo no seleccionado";
 });
 
-// Subir canción simulada
+// Subir canción
 const uploadBtn = document.getElementById("upload-btn");
 const songList = document.getElementById("song-list");
 
 uploadBtn.addEventListener("click", () => {
-  const title = document.getElementById("song-title").value;
-  const artist = document.getElementById("song-artist").value;
+  const title = document.getElementById("song-title").value.trim();
+  const artist = document.getElementById("song-artist").value.trim();
 
   if (!title || !artist || !audioInput.files.length || !coverInput.files.length) {
-    alert("Por favor, completa todos los campos y selecciona archivos.");
+    alert("Por favor, completa todos los campos y selecciona los archivos.");
     return;
   }
 
@@ -48,14 +49,14 @@ uploadBtn.addEventListener("click", () => {
     <span>${title} - ${artist}</span>
     <button class="btn-crystal delete-btn">Eliminar</button>
   `;
-  songList.appendChild(songItem);
 
-  // Botón eliminar
   songItem.querySelector(".delete-btn").addEventListener("click", () => {
     songItem.remove();
   });
 
-  // Limpiar formulario
+  songList.appendChild(songItem);
+
+  // Resetear formulario
   document.getElementById("song-title").value = "";
   document.getElementById("song-artist").value = "";
   audioInput.value = "";
@@ -63,3 +64,5 @@ uploadBtn.addEventListener("click", () => {
   audioName.textContent = "Archivo no seleccionado";
   coverName.textContent = "Archivo no seleccionado";
 });
+
+
