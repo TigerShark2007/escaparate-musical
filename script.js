@@ -63,7 +63,7 @@ uploadBtn.addEventListener("click", async () => {
         </audio>
       </div>
     </div>
-    <button class="btn-crystal-Eliminar delete-btn">Eliminar</button>
+    <button class="btn-crystal-eliminar delete-btn">Eliminar</button>
   `;
 
   songItem.querySelector(".delete-btn").addEventListener("click", () => {
@@ -90,4 +90,5 @@ function fileToBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+
 
