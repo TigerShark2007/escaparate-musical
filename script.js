@@ -58,3 +58,42 @@ uploadBtn.addEventListener('click', () => {
 
     readerCover.onload = (e2) => {
       const coverData = e2.target.result;
+
+      const song = { title, artist, audioData, coverData };
+
+      // Guardar en IndexedDB
+      const tx = db.transaction('songs', 'readwrite');
+      tx.objectStore('songs').add(song);
+      tx.oncomplete = loadSongs;
+    };
+
+    readerCover.readAsDataURL(coverInput.files[0]);
+  };
+
+  readerAudio.readAsDataURL(audioInput.files[0]);
+});
+
+// --- Cargar canciones ---
+function loadSongs() {
+  songsContainer.innerHTML = '';
+  const tx = db.transaction('songs', 'readonly');
+  const store = tx.objectStore('songs');
+  const request = store.getAll();
+
+  request.onsuccess = () => {
+    const songs = request.result;
+    songs.forEach(song => {
+      const div = document.createElement('div');
+      div.classList.add('song-card');
+      div.innerHTML = `
+        <img src="${song.coverData}" alt="Carátula">
+        <h3>${song.title}</h3>
+        <p>${song.artist}</p>
+        <audio controls>
+          <source src="${song.audioData}">
+        </audio>
+      `;
+      songsContainer.appendChild(div);
+    });
+  };
+}
