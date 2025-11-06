@@ -48,6 +48,20 @@ body {
   transition: all 0.3s ease;
 }
 
+.btn-crystal-eliminar {
+    background: rgba(46, 208, 179, 0.2);
+    border: 1px solid rgba(46, 208, 179, 0.6);
+    color: #2ed0b3;
+    font-weight: bold;
+    border-radius: 25px;
+    padding: 9px 27px;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 12px rgba(46, 208, 179, 0.3);
+    transition: all 0.3s 
+ease;
+}
+
 .btn-crystal:hover {
   background: rgba(46, 208, 179, 0.4);
   box-shadow: 0 0 20px rgba(46, 208, 179, 0.6);
@@ -154,5 +168,6 @@ body {
   outline: none;
   border-radius: 8px;
 }
+
 
 
