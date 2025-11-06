@@ -1,201 +1,96 @@
-:root{
-  --bg1: #0f1723;
-  --bg2: #071226;
-  --accent: #4fd0c1; /* turquesa suave */
-  --panel: rgba(255,255,255,0.04);
-  --glass: rgba(255,255,255,0.06);
-  --text: #dff7f5;
-  --muted: #9fbfb9;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(180deg, #00111a, #002233);
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Reset muy básico */
-*{box-sizing:border-box;margin:0;padding:0}
-html,body,#root{height:100%}
-body{
-  font-family: Inter, "Poppins", system-ui, Arial, sans-serif;
-  background: radial-gradient(circle at 10% 10%, #082233 0%, #051324 35%, #03111b 100%);
-  color: var(--text);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+/* ----- Pantalla inicial ----- */
+.main-title {
+  font-size: 3rem;
+  color: #2ed0b3;
+  text-align: center;
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px #2ed0b3;
 }
 
-/* Layout */
-.page{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:40px 20px 80px;
-}
-
-/* HERO title large centered */
-.hero{
-  font-size:72px;
-  line-height:1;
-  color: var(--accent);
-  background: rgba(0,0,0,0.37);
-  padding: 28px 48px;
-  border-radius: 28px;
-  box-shadow: inset 0 0 8px rgba(255,255,255,0.08), 0 10px 30px rgba(0,0,0,0.6);
-  backdrop-filter: blur(8px);
-  text-align:center;
-  margin-bottom: 28px;
-  transition: all .25s ease;
-}
-
-/* BUTTON base */
-.btn{
-  display:inline-block;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-  color: var(--text);
-  border: 1px solid rgba(255,255,255,0.06);
-  padding: 12px 20px;
-  border-radius: 999px;
+/* ----- Botón estilo cristal ----- */
+.btn-crystal {
+  background: rgba(46, 208, 179, 0.2);
+  border: 1px solid rgba(46, 208, 179, 0.5);
+  color: #2ed0b3;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 10px 20px;
   cursor: pointer;
-  font-weight:600;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-  user-select:none;
-}
-
-/* accent primary style */
-.btn.primary{
-  background: linear-gradient(180deg, rgba(79,208,193,0.95), rgba(63,169,157,0.95));
-  color:#022a27;
-  box-shadow: 0 10px 30px rgba(63,169,157,0.18);
-}
-
-/* file-styled button */
-.file-btn{
-  padding:10px 16px;
-  border-radius:16px;
-  display:inline-flex;
-  align-items:center;
-}
-
-/* hover */
-.btn:hover{ transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,0.6) }
-.btn.primary:hover{ transform: translateY(-4px); box-shadow: 0 20px 50px rgba(63,169,157,0.22) }
-
-/* admin button position */
-#admin-login-btn{
-  margin-bottom: 18px;
-  position: relative;
-}
-
-/* Admin area (hidden before login) */
-.admin{
-  width: 92%;
-  max-width: 520px;
-  margin-top: 18px;
-  background: var(--panel);
-  border-radius: 18px;
-  padding: 22px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 0 10px rgba(46, 208, 179, 0.2);
+  transition: all 0.2s ease;
+}
+.btn-crystal:hover {
+  background: rgba(46, 208, 179, 0.4);
+  box-shadow: 0 0 20px rgba(46, 208, 179, 0.5);
 }
 
-/* Title above form (smaller hero) */
-.form-title{
-  font-size: 28px;
-  color: var(--accent);
-  margin-bottom: 16px;
-  text-align:center;
+/* ----- Formulario de subida ----- */
+.hidden {
+  display: none;
 }
 
-/* Inputs */
-.input, input[type="text"]{
-  width:100%;
-  padding:12px 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.04);
-  background: rgba(255,255,255,0.02);
-  color: var(--text);
-  margin-bottom: 12px;
+.sub-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #2ed0b3;
+  margin-bottom: 15px;
+}
+
+.upload-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 30px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 0 15px rgba(46, 208, 179, 0.2);
+}
+
+.input-field {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
   outline: none;
+  font-size: 0.9rem;
 }
 
-.input::placeholder{ color: var(--muted); }
-
-/* file-row layout */
-.file-row{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:12px;
+.file-upload {
+  text-align: center;
 }
 
-.file-row .file-name{
-  color:var(--muted);
-  font-size:14px;
-  flex:1;
-  text-align:left;
-  word-break: break-all;
+.file-upload p {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 5px;
 }
 
-/* actions row */
-.actions-row{ display:flex; justify-content:flex-start; gap:12px; margin-top:8px }
-
-/* Songs list */
-.songs{
-  width:100%;
-  max-width:1100px;
-  margin-top:36px;
-  display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap:20px;
+#song-list {
+  margin-top: 15px;
 }
 
-/* Song card */
-.song-card{
-  background: var(--glass);
-  border-radius: 14px;
-  padding:12px;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.6);
-  border: 1px solid rgba(255,255,255,0.03);
-  display:flex;
-  flex-direction:column;
-  align-items:stretch;
-}
-
-.song-card img{
-  width:100%;
-  height:160px;
-  object-fit:cover;
-  border-radius:10px;
-  margin-bottom:10px;
-}
-
-.song-card h3{ color: var(--accent); margin:6px 0; font-size:18px }
-.song-card p{ color: var(--muted); margin:0 0 8px 0; font-size:14px }
-
-/* bottom controls inside card */
-.card-controls{
-  margin-top:8px;
-  display:flex;
-  gap:8px;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.delete-btn{
-  background: transparent;
-  color: #ffb3b3;
-  border:1px solid rgba(255,180,180,0.06);
-  padding:8px 12px;
-  border-radius:10px;
-  cursor:pointer;
-}
-
-.delete-btn:hover{ transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255,100,100,0.06) }
-
-/* hidden utility */
-.hidden{ display:none !important }
-
-/* responsive tweaks */
-@media (max-width:600px){
-  .hero{ font-size:44px; padding:18px 28px }
-  .admin{ padding:16px }
-  .songs{ gap:14px }
+.song-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 8px;
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
