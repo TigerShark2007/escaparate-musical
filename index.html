@@ -1,39 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Escaparate Musical</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Escaparate Musical</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1 class="main-title">🎧 Mi Escaparate Musical</h1>
+  <!-- Página inicial: gran título centrado -->
+  <main class="page">
+    <h1 id="hero-title" class="hero">🎧 Escaparate Musical</h1>
 
-    <div id="adminPanel" class="admin-panel hidden">
-      <h2>Subir nueva canción</h2>
-      <input type="text" id="title" placeholder="Título">
-      <input type="text" id="artist" placeholder="Artista">
-      
-      <label class="file-input-label">Seleccionar archivo de audio
-        <input type="file" id="audioFile" accept="audio/*">
-      </label>
+    <!-- Botón de login visible antes de iniciar -->
+    <button id="admin-login-btn" class="btn">Iniciar sesión administrador</button>
 
-      <label class="file-input-label">Seleccionar carátula
-        <input type="file" id="coverFile" accept="image/*">
-      </label>
+    <!-- Panel de administración (oculto hasta login) -->
+    <section id="admin-area" class="admin hidden">
+      <h2 id="form-title" class="form-title">🎧 Escaparate Musical</h2>
 
-      <button id="uploadBtn" class="soft-button">Subir canción</button>
-    </div>
+      <div class="form">
+        <input id="song-title" type="text" placeholder="Título de la canción" class="input" />
+        <input id="song-artist" type="text" placeholder="Artista" class="input" />
 
-    <button id="adminLoginBtn" class="soft-button admin-login">Iniciar sesión administrador</button>
-  </div>
-  <h1 class="main-title">🎧 Mi Escaparate Musical</h1>
+        <div class="file-row">
+          <label class="btn file-btn">Archivo de audio
+            <input id="song-audio" type="file" accept=".mp3,.wav,.aac,.m4a" />
+          </label>
+          <span id="audio-name" class="file-name">archivo no seleccionado</span>
+        </div>
+
+        <div class="file-row">
+          <label class="btn file-btn">Portada (imagen)
+            <input id="song-cover" type="file" accept="image/*" />
+          </label>
+          <span id="cover-name" class="file-name">archivo no seleccionado</span>
+        </div>
+
+        <div class="actions-row">
+          <button id="upload-btn" class="btn primary">Subir canción</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contenedor para las canciones -->
+    <section id="songs-list" class="songs"></section>
+  </main>
+
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
