@@ -96,3 +96,32 @@ input[type="text"] {
   bottom: 30px;
   left: 30px;
 }
+/* --- Estilo para el título principal --- */
+.main-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #00796b;
+  text-align: center;
+  margin: 80px auto 50px;
+  padding: 20px 50px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: inline-block;
+  animation: fadeIn 1.2s ease-out;
+}
+
+/* Pequeña animación de aparición */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
