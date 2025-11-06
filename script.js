@@ -1,99 +1,170 @@
+/*******************************
+ * script.js - Escaparate Musical
+ *******************************/
+
+const ADMIN_PASS = "1234";
+
+/* DOM elements */
 const adminLoginBtn = document.getElementById('admin-login-btn');
-const adminPanel = document.getElementById('admin-panel');
+const adminArea = document.getElementById('admin-area');
+const heroTitle = document.getElementById('hero-title');
+
 const uploadBtn = document.getElementById('upload-btn');
 const audioInput = document.getElementById('song-audio');
 const coverInput = document.getElementById('song-cover');
-const songsContainer = document.getElementById('songs-container');
-const audioFileName = document.getElementById('audio-file-name');
-const coverFileName = document.getElementById('cover-file-name');
+const audioName = document.getElementById('audio-name');
+const coverName = document.getElementById('cover-name');
+const songTitleInput = document.getElementById('song-title');
+const songArtistInput = document.getElementById('song-artist');
+
+const songsList = document.getElementById('songs-list');
 
 let db;
-let songs = [];
 
-// --- IndexedDB Setup ---
-const request = indexedDB.open('musicDB', 1);
-request.onupgradeneeded = (event) => {
-  db = event.target.result;
-  db.createObjectStore('songs', { keyPath: 'id', autoIncrement: true });
+/* ---------- IndexedDB setup ---------- */
+const req = indexedDB.open('MiEscaparateDB_v1', 1);
+req.onupgradeneeded = (e) => {
+  db = e.target.result;
+  if (!db.objectStoreNames.contains('songs')) {
+    db.createObjectStore('songs', { keyPath: 'id', autoIncrement: true });
+  }
 };
-request.onsuccess = (event) => {
-  db = event.target.result;
-  loadSongs();
+req.onsuccess = (e) => {
+  db = e.target.result;
+  renderSongsFromDB();
 };
+req.onerror = (e) => console.error('IndexedDB error', e);
 
-// --- Login de administrador ---
+/* ---------- Admin login logic ---------- */
 adminLoginBtn.addEventListener('click', () => {
-  const password = prompt("Introduce la contraseña de administrador:");
-  if (password === "1234") {
-    adminPanel.classList.remove('hidden');
+  const pwd = prompt('Introduce la contraseña de administrador:');
+  if (pwd === null) return;
+  if (pwd === ADMIN_PASS) {
+    // show admin area, shrink hero
+    adminArea.classList.remove('hidden');
     adminLoginBtn.classList.add('hidden');
-  } else if (password !== null) {
-    alert("Contraseña incorrecta");
+    heroTitle.style.fontSize = '30px';
+    heroTitle.style.padding = '12px 20px';
+  } else {
+    alert('Contraseña incorrecta');
   }
 });
 
-// Mostrar nombre del archivo seleccionado
+/* ---------- File name display ---------- */
 audioInput.addEventListener('change', () => {
-  audioFileName.textContent = audioInput.files[0]?.name || "Ningún archivo seleccionado";
+  audioName.textContent = audioInput.files[0]?.name || 'archivo no seleccionado';
 });
 coverInput.addEventListener('change', () => {
-  coverFileName.textContent = coverInput.files[0]?.name || "Ningún archivo seleccionado";
+  coverName.textContent = coverInput.files[0]?.name || 'archivo no seleccionado';
 });
 
-// --- Subir canción ---
-uploadBtn.addEventListener('click', () => {
-  const title = document.getElementById('song-title').value.trim();
-  const artist = document.getElementById('song-artist').value.trim();
+/* ---------- Upload (store files as dataURLs) ---------- */
+uploadBtn.addEventListener('click', async () => {
+  const title = songTitleInput.value.trim();
+  const artist = songArtistInput.value.trim();
+  const audioFile = audioInput.files[0];
+  const coverFile = coverInput.files[0];
 
-  if (!title || !artist || !audioInput.files[0] || !coverInput.files[0]) {
-    alert("Por favor, completa todos los campos y selecciona los archivos.");
+  if (!title || !artist || !audioFile || !coverFile) {
+    alert('Rellena todos los campos y selecciona los archivos.');
     return;
   }
 
-  const readerAudio = new FileReader();
-  const readerCover = new FileReader();
+  // validate cover size minimal 3000x3000 (optional: warn if too small)
+  const img = new Image();
+  img.src = URL.createObjectURL(coverFile);
+  img.onload = async () => {
+    if (img.width < 3000 || img.height < 3000) {
+      const ok = confirm('La carátula es más pequeña que 3000×3000. ¿Quieres subirla de todas formas?');
+      if (!ok) return;
+    }
 
-  readerAudio.onload = (e) => {
-    const audioData = e.target.result;
+    // read files as data URLs
+    const audioData = await fileToDataURL(audioFile);
+    const coverData = await fileToDataURL(coverFile);
 
-    readerCover.onload = (e2) => {
-      const coverData = e2.target.result;
-
-      const song = { title, artist, audioData, coverData };
-
-      // Guardar en IndexedDB
-      const tx = db.transaction('songs', 'readwrite');
-      tx.objectStore('songs').add(song);
-      tx.oncomplete = loadSongs;
+    const tx = db.transaction('songs', 'readwrite');
+    const store = tx.objectStore('songs');
+    const record = {
+      title,
+      artist,
+      audioData,
+      coverData,
+      createdAt: Date.now()
     };
-
-    readerCover.readAsDataURL(coverInput.files[0]);
+    store.add(record);
+    tx.oncomplete = () => {
+      // clear form
+      songTitleInput.value = '';
+      songArtistInput.value = '';
+      audioInput.value = '';
+      coverInput.value = '';
+      audioName.textContent = 'archivo no seleccionado';
+      coverName.textContent = 'archivo no seleccionado';
+      renderSongsFromDB();
+    };
+    tx.onerror = (e) => {
+      console.error('Error saving song', e);
+      alert('Error guardando la canción.');
+    };
   };
-
-  readerAudio.readAsDataURL(audioInput.files[0]);
 });
 
-// --- Cargar canciones ---
-function loadSongs() {
-  songsContainer.innerHTML = '';
+/* ---------- Helpers ---------- */
+function fileToDataURL(file){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => resolve(e.target.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ---------- Render songs ---------- */
+function renderSongsFromDB(){
+  songsList.innerHTML = '';
   const tx = db.transaction('songs', 'readonly');
   const store = tx.objectStore('songs');
-  const request = store.getAll();
-
-  request.onsuccess = () => {
-    const songs = request.result;
-    songs.forEach(song => {
-      const div = document.createElement('div');
-      div.classList.add('song-card');
-      div.innerHTML = `
-        <img src="${song.coverData}" alt="Carátula">
-        <h3>${song.title}</h3>
-        <p>${song.artist}</p>
+  const reqAll = store.getAll();
+  reqAll.onsuccess = () => {
+    const items = reqAll.result.sort((a,b)=> b.createdAt - a.createdAt);
+    items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'song-card';
+      card.innerHTML = `
+        <img src="${item.coverData}" alt="portada">
+        <h3>${escapeHtml(item.title)}</h3>
+        <p>${escapeHtml(item.artist)}</p>
         <audio controls>
-          <source src="${song.audioData}">
+          <source src="${item.audioData}" type="audio/mpeg">
+          Tu navegador no soporta el reproductor.
         </audio>
+        <div class="card-controls">
+          <small style="color:var(--muted)">${new Date(item.createdAt).toLocaleString()}</small>
+          <div>
+            <button class="delete-btn" data-id="${item.id}">Eliminar</button>
+          </div>
+        </div>
       `;
-      songsContainer.appendChild(div);
+      songsList.appendChild(card);
+    });
+
+    // attach delete handlers
+    songsList.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = Number(btn.dataset.id);
+        if (!confirm('¿Eliminar esta canción?')) return;
+        const tx = db.transaction('songs','readwrite');
+        tx.objectStore('songs').delete(id);
+        tx.oncomplete = () => renderSongsFromDB();
+      });
     });
   };
+}
+
+/* small helper to avoid XSS in titles/artists */
+function escapeHtml(str){
+  return String(str).replace(/[&<>"'`]/g, s=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;', '`':'&#96;'
+  }[s]));
 }
